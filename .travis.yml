@@ -1,4 +1,4 @@
 before_install:
- - sudo apt-get augeas
+ - sudo apt-get -q -y augeas
 
 script: augparse tests/test_gitolite.aug
