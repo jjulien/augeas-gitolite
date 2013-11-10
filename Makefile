@@ -9,3 +9,5 @@ install:
 	install -m0644 gitolite.aug $(LENS_DEST)
 	install -m0644 tests/test_gitolite.aug $(LENS_TEST_DEST)
 
+test:
+	augparse -I . tests/test_gitolite.aug

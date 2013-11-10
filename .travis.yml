@@ -1,4 +1,4 @@
 before_install:
- - sudo apt-get -q -y augeas
+ - sudo apt-get -q -y install augeas-tools
 
-script: augparse tests/test_gitolite.aug
+script: make test
