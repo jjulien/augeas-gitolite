@@ -34,8 +34,6 @@ module Gitolite =
            http://gitolite.com/gitolite/cust.html#sugar *)
   let user_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@+]*/
   let group_syntax = del /^@/ "@" . store /[a-zA-Z0-9]+[a-zA-Z0-9._\-]*/ . del /[ \t]*=/ " ="
-  (* let group_syntax = del /^@/ "@" . [ key /[a-zA-Z0-9]+[a-zA-Z0-9._\-]*/ . del /[ \t]*=/ " =" ] *)
-  (* let reponame_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@\/+]*/ *)
   let reponame_syntax = store /[0-9a-zA-Z]+/
 
   (* Setup Group Lens *)
@@ -46,9 +44,9 @@ module Gitolite =
   (* Setup Repo Lens *)
   let repo = label "repo" . del /^repo[ \t]+/ "repo " . reponame_syntax . eol
 
-  (* TODO: It might be nice to break the access rules down into modes (rule -> ref -> access)
+  (* TODO: It might be nice to break the access rules down into nodes (rule -> ref -> access)
            1st iteration will just plop a string in place for the access rule.  It's up to 
-           to use to make sure the syntax is correct  *)
+           to user to make sure the syntax is correct  *)
   let access_rule = [ label "accessrule" . del /[ \t]+/ "  " . store /[^ \t][^\n]+/ . eol ]
   let repos = [ repo . (access_rule)* ]
 
