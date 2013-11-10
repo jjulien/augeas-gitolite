@@ -34,7 +34,7 @@ module Gitolite =
            http://gitolite.com/gitolite/cust.html#sugar *)
   let user_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@+]*/
   let group_syntax = del /^@/ "@" . store /[a-zA-Z0-9]+[a-zA-Z0-9._\-]*/ . del /[ \t]*=/ " ="
-  let reponame_syntax = store /[0-9a-zA-Z]+/
+  let reponame_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@\/+]*/
 
   (* Setup Group Lens *)
   let user = label "user" . Util.del_ws_spc . user_syntax 
