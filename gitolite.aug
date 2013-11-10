@@ -30,14 +30,14 @@ module Gitolite =
      Gitolite Specific Syntax - Based on Gitolite version 3
      Soure: http://gitolite.com/gitolite/syntax.html
  
-     NOTE: Configs that use syntatic sugar are not supported by this module.  
+     NOTE: Configs that use syntatic sugar are not supported by this module.
            http://gitolite.com/gitolite/cust.html#sugar *)
   let user_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@+]*/
   let group_syntax = del /^@/ "@" . store /[a-zA-Z0-9]+[a-zA-Z0-9._\-]*/ . del /[ \t]*=/ " ="
   let reponame_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@\/+]*/
 
   (* Setup Group Lens *)
-  let user = label "user" . Util.del_ws_spc . user_syntax 
+  let user = label "user" . Util.del_ws_spc . user_syntax
   let group = label "group" . group_syntax
   let groups = [ group . [ user ]+ ] . eol+
 
@@ -52,7 +52,7 @@ module Gitolite =
 
   (* TODO: Need to add support for include sections *)
   
-  (* Final setup of lens *)  
+  (* Final setup of lens *)
   let lns = ( empty | repos | groups )*
 
   let filter = incl "*/gitolite.conf"  
