@@ -1,6 +1,6 @@
 Name:		augeas-gitolite
 Version:	1.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:        Provides a lens for managing gitolite.conf files with augeas	
 
 Group:		System Environment/Libraries
@@ -32,6 +32,11 @@ rm -rf $RPM_BUILD_ROOT
 %{lenses}/gitolite.aug
 %{lenses}/tests/test_gitolite.aug
 
+
+%changelog
+* Sun Nov 10 2013 John Julien <john@julienfamily.com> - 1.0-2
+- Using more obvious glob for incl filter
+- Setting BuildArch to noarch
 
 %changelog
 * Sat Nov 9 2013 John Julien <john@julienfamily.com> - 1.0-1
