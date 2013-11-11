@@ -10,6 +10,7 @@ Source0:        %{name}-%{version}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 Requires:      augeas
+BuildArch:     noarch
 
 %define lenses /usr/share/augeas/lenses
 
