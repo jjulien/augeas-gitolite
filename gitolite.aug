@@ -55,6 +55,6 @@ module Gitolite =
   (* Final setup of lens *)
   let lns = ( empty | repos | groups )*
 
-  let filter = incl "*/gitolite.conf"  
+  let filter = incl "/home/*/gitolite-admin/conf/gitolite.conf" . incl "/var/lib/gitolite3/gitolite-admin/conf/gitolite.conf"  
 
   let xfm = transform lns filter
