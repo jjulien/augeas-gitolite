@@ -13,10 +13,12 @@ Coming soon...
 Any new features or modifications should have an associated test with a comment describing the test in tests/test_gitolite.aug
 
 **Running tests**
+
 ```make test```
 
 **Installing**
-```make install````
+
+```make install```
 
 **Loading a test gitolite config file using augtool**
 ```
