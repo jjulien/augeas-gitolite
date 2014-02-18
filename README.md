@@ -12,5 +12,5 @@ Coming soon...
 ### Development
 Any new features or modifications should have an associated test with a comment describing the test in tests/test_gitolite.aug
 
-* *Running tests* : make test
-* *Installing*    : make install
+* **Running tests** `make test`
+* **Installing**    `make install`
