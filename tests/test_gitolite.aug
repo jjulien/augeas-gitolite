@@ -1,6 +1,7 @@
 module Test_gitolite =
 
 let conf = "
+# Test config
 @stooges = moe larry curly
 @admins = healy
 @composers = friend monaco
@@ -18,6 +19,7 @@ repo meto
 
 (* Parse the above sample config and verify the results *)
 test Gitolite.lns get conf =   {  }
+  { "comment" = " Test config" }
   { "group" = "stooges"
     { "user" = "moe" }
     { "user" = "larry" }
@@ -71,3 +73,13 @@ test Gitolite.lns put "@mygroup = user1 user2\n" after
 test Gitolite.lns put "@group_of_groups = @group1 @group2\n" after
     set "/group[. = 'group_of_groups']/user[. = '@group3']" "@group3" =
     "@group_of_groups = @group1 @group2 @group3\n"
+
+(* Testing the use of set to manage comments *)
+test Gitolite.lns put "#first comment\n" after
+    set "/comment" "modified comment" =
+    "#modified comment\n"
+
+(* Testing the use of set to add additional comment nodes *)
+test Gitolite.lns put "# existing comment\n" after
+    set "/comment[last()+1]" "new comment" =
+    "# existing comment\n#new comment\n"
