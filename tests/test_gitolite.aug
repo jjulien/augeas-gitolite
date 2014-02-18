@@ -4,6 +4,7 @@ let conf = "
 @stooges = moe larry curly
 @admins = healy
 @composers = friend monaco
+@cast_and_crew = @stooges @admins @composers
 repo souptonuts
    RW+                 = @admins
    RW                  = goldberg
@@ -15,6 +16,7 @@ repo meto
   RW  = joe
 "
 
+(* Parse the above sample config and verify the results *)
 test Gitolite.lns get conf =   {  }
   { "group" = "stooges"
     { "user" = "moe" }
@@ -28,6 +30,11 @@ test Gitolite.lns get conf =   {  }
     { "user" = "friend" }
     { "user" = "monaco" }
   }
+  { "group" = "cast_and_crew" 
+    { "user" = "@stooges"   }
+    { "user" = "@admins"    }
+    { "user" = "@composers" }
+  }
   { "repo" = "souptonuts"
     { "accessrule" = "RW+                 = @admins" }
     { "accessrule" = "RW                  = goldberg" }
@@ -40,18 +47,27 @@ test Gitolite.lns get conf =   {  }
     { "accessrule" = "RW  = joe" }
   }
 
+(* Testing the addition of a read rule to a specific repo node *)
 test Gitolite.lns put "repo pranks\n  RW+  = @stooges\n" after
     set "/repo[. = 'pranks']/accessrule[. = 'R = goldberb']" "R = goldberg" =
     "repo pranks\n  RW+  = @stooges\n  R = goldberg\n"
 
+(* Testing the removal of a user node from a group node *)
 test Gitolite.lns put "@mygroup = user1 user2\n" after
     rm "/group[. = 'mygroup']/user[. = 'user1']" =
     "@mygroup = user2\n"
 
+(* Testing the automatic appending of a user node when a match is not found *)
 test Gitolite.lns put "@mygroup = user1 user2\n" after
     set "/group[. = 'mygroup']/user[. = 'user3']" "user3" =
     "@mygroup = user1 user2 user3\n"
 
+(* Testing the idempotent nature of matching a user *)
 test Gitolite.lns put "@mygroup = user1 user2\n" after
     set "/group[. = 'mygroup']/user[. = 'user2']" "user2" =
     "@mygroup = user1 user2\n"
+
+(* Testing the use of set to add groups to a groups *)
+test Gitolite.lns put "@group_of_groups = @group1 @group2\n" after
+    set "/group[. = 'group_of_groups']/user[. = '@group3']" "@group3" =
+    "@group_of_groups = @group1 @group2 @group3\n"
