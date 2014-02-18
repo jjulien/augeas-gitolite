@@ -36,6 +36,8 @@ module Gitolite =
   let group_syntax = del /^@/ "@" . store /[a-zA-Z0-9]+[a-zA-Z0-9._\-]*/ . del /[ \t]*=/ " ="
   let reponame_syntax = store /\@?[0-9a-zA-Z][-0-9a-zA-Z._\@\/+]*/
 
+  let comment = [ label "comment" . del /^[ \t]*/ "" . del /#/ "#" . store /[^\n]*/ . eol ]
+
   (* Setup Group Lens *)
   let user = label "user" . Util.del_ws_spc . user_syntax
   let group = label "group" . group_syntax
@@ -53,7 +55,7 @@ module Gitolite =
   (* TODO: Need to add support for include sections *)
   
   (* Final setup of lens *)
-  let lns = ( empty | repos | groups )*
+  let lns = ( empty | repos | groups | comment)*
 
   let filter = incl "/home/*/gitolite-admin/conf/gitolite.conf" . incl "/var/lib/gitolite3/gitolite-admin/conf/gitolite.conf"  
 
