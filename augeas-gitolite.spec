@@ -1,6 +1,6 @@
 Name:		augeas-gitolite
-Version:	1.0
-Release:	2%{?dist}
+Version:	1.1
+Release:	1%{?dist}
 Summary:        Provides a lens for managing gitolite.conf files with augeas	
 
 Group:		System Environment/Libraries
@@ -32,6 +32,9 @@ rm -rf $RPM_BUILD_ROOT
 %{lenses}/gitolite.aug
 %{lenses}/tests/test_gitolite.aug
 
+%changelog
+* Tue Feb 18 2014 John Julien <john@julienfamily.com> - 1.1-1
+- Added support for comments in gitolite.conf
 
 %changelog
 * Sun Nov 10 2013 John Julien <john@julienfamily.com> - 1.0-2
