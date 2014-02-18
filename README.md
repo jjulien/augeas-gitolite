@@ -6,4 +6,11 @@ This is an augeas lens that is used to manage a gitolite.conf file.  There are s
 
 Documentation
 -----------
-Needs to be written still, sorry.
+### Usage
+Coming soon...
+
+### Development
+Any new features or modifications should have an associated test with a comment describing the test in tests/test_gitolite.aug
+
+Running tests : make test
+Installing    : make install
