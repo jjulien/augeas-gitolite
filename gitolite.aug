@@ -28,7 +28,7 @@ module Gitolite =
 
   (* 
      Gitolite Specific Syntax - Based on Gitolite version 3
-     Soure: http://gitolite.com/gitolite/syntax.html
+     Source: http://gitolite.com/gitolite/syntax.html
  
      NOTE: Configs that use syntatic sugar are not supported by this module.
            http://gitolite.com/gitolite/cust.html#sugar *)
@@ -48,7 +48,7 @@ module Gitolite =
 
   (* TODO: It might be nice to break the access rules down into nodes (rule -> ref -> access)
            1st iteration will just plop a string in place for the access rule.  It's up to 
-           to user to make sure the syntax is correct  *)
+           the user to make sure the syntax is correct. *)
   let access_rule = [ label "accessrule" . del /[ \t]+/ "  " . store /[^ \t][^\n]+/ . eol ]
   let repos = [ repo . (access_rule)* ]
 
