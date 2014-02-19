@@ -7,7 +7,11 @@ This is an augeas lens that is used to manage a gitolite.conf file.  There are s
 Documentation
 -----------
 ### Usage
-Coming soon...
+augeas-gitolite by default looks for files in the following locations:
+* /home/*/gitolite-admin/conf/gitolite.conf
+* /var/lib/gitolite3/gitolite-admin/conf/gitolite.conf
+
+The /home/*/gitolite-admin filter is useful for managing a gitolite config that you have checked out in a home directory.  One handy way to use this is by cloning the gitolite-admin repo in the home directory of the user you have setup for gitolite.  You can then use augeas-gitolite to manage the config and `gitolite push` to apply the changes without the need for any additional ssh connections.
 
 ### Development
 Any new features or modifications should have an associated test with a comment describing the test in tests/test_gitolite.aug
